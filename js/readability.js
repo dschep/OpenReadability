@@ -97,7 +97,6 @@ var readability = {
         var articleTools   = readability.getArticleTools();
         var articleTitle   = readability.getArticleTitle();
         var articleContent = readability.grabArticle();
-        var articleFooter  = readability.getArticleFooter();
 
         if(!articleContent) {
             articleContent    = document.createElement("DIV");
@@ -133,7 +132,6 @@ var readability = {
         /* Glue the structure of our document together. */
         innerDiv.appendChild( articleTitle   );
         innerDiv.appendChild( articleContent );
-        innerDiv.appendChild( articleFooter  );
          overlay.appendChild( articleTools   );
          overlay.appendChild( innerDiv       );
 
@@ -349,39 +347,6 @@ var readability = {
         return articleTitle;
     },
 
-    /**
-     * Get the footer with the readability mark etc.
-     *
-     * @return void
-     **/
-    getArticleFooter: function () {
-        var articleFooter = document.createElement("DIV");
-
-        /**
-         * For research purposes, generate an img src that contains the chosen readstyle etc,
-         * so we can generate aggregate stats and change styles based on them in the future
-         **/
-        // var statsQueryParams = "?readStyle=" + encodeURIComponent(readStyle) + "&readMargin=" + encodeURIComponent(readMargin) + "&readSize=" + encodeURIComponent(readSize);
-        /* TODO: attach this to an image */
-
-        articleFooter.id = "readFooter";
-        articleFooter.innerHTML = [
-        "<div id='rdb-footer-print'>Excerpted from <cite>" + document.title + "</cite><br />" + window.location.href + "</div>",
-        "<div id='rdb-footer-wrapper'>",
-             "<div id='rdb-footer-left'>",
-                 "<a href='http://lab.arc90.com/experiments/readability' id='readability-logo'>Readability &mdash;&nbsp;</a>",
-                 "<a href='http://www.arc90.com/' id='arc90-logo'> An Arc90 Laboratory Experiment&nbsp;</a>",
-                 " <span id='readability-url'> http://lab.arc90.com/experiments/readability</span>",
-             "</div>",
-             "<div id='rdb-footer-right'>",
-                 "<a href='http://www.twitter.com/arc90' class='footer-twitterLink'>Follow us on Twitter &raquo;</a>",
-                 "<span class='version'>Readability version " + readability.version + "</span>",
-             "</div>",
-        "</div>"].join('');
-                
-        return articleFooter;
-    },
-    
     /**
      * Prepare the HTML document for readability to scrape it.
      * This includes things like stripping javascript, CSS, and handling terrible markup.
