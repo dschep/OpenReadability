@@ -69,8 +69,6 @@ em {
     text-indent: -9000px;
     }
 
-#es #header h1 { background-image: url("../images/logo-readability-es-large.png"); }
-
 #introduction {
     display: inline;
     float: left;
@@ -108,8 +106,6 @@ em {
     width: 560px;
     background: transparent url("../images/bg-settings.png") no-repeat 0 65px;
     }
-
-#es #settings { background-image: url("../images/bg-settings-es.png"); }
 
 #settings h2, #bookmarklet h2 {
     margin: 0 0 15px;
