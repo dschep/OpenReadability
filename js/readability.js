@@ -17,7 +17,6 @@ var dbg = (typeof console !== 'undefined') ? function(s) {
 **/
 var readability = {
     version:                '1.7.1',
-    emailSrc:               'http://lab.arc90.com/experiments/readability/email.php',
     iframeLoads:             0,
     convertLinksToFootnotes: false,
     reversePageScroll:       false, /* If they hold shift and hit space, scroll up */
@@ -258,8 +257,7 @@ var readability = {
         articleTools.id        = "readTools";
         articleTools.innerHTML = 
             "<a href='#' onclick='return window.location.reload()' title='Reload original page' id='reload-page'>Reload Original Page</a>" +
-            "<a href='#' onclick='javascript:window.print();' title='Print page' id='print-page'>Print Page</a>" +
-            "<a href='#' onclick='readability.emailBox(); return false;' title='Email page' id='email-page'>Email Page</a>";
+            "<a href='#' onclick='javascript:window.print();' title='Print page' id='print-page'>Print Page</a>";
 
         return articleTools;
     },
@@ -1719,46 +1717,6 @@ var readability = {
                 readability.scrollTo(scrollStart, scrollEnd, steps, interval);
             }, interval);
         }
-    },
-
-    
-    /**
-     * Show the email popup.
-     *
-     * @return void
-     **/
-    emailBox: function () {
-        var emailContainerExists = document.getElementById('email-container');
-        if(null !== emailContainerExists)
-        {
-            return;
-        }
-
-        var emailContainer = document.createElement("DIV");
-        emailContainer.setAttribute('id', 'email-container');
-        emailContainer.innerHTML = '<iframe src="'+readability.emailSrc + '?pageUrl='+encodeURIComponent(window.location)+'&pageTitle='+encodeURIComponent(document.title)+'" scrolling="no" onload="readability.removeFrame()" style="width:500px; height: 490px; border: 0;"></iframe>';
-
-        document.body.appendChild(emailContainer);          
-    },
-    
-    /**
-     * Close the email popup. This is a hacktackular way to check if we're in a "close loop".
-     * Since we don't have crossdomain access to the frame, we can only know when it has
-     * loaded again. If it's loaded over 3 times, we know to close the frame.
-     *
-     * @return void
-     **/
-    removeFrame: function () {
-        readability.iframeLoads+=1;
-        if (readability.iframeLoads > 3)
-        {
-            var emailContainer = document.getElementById('email-container');
-            if (null !== emailContainer) {
-                emailContainer.parentNode.removeChild(emailContainer);
-            }
-
-            readability.iframeLoads = 0;
-        }           
     },
     
     htmlspecialchars: function (s) {
