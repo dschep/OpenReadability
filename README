@@ -1,0 +1,9 @@
+This a fork of Arc90's Readability (https://code.google.com/p/arc90labs-readability/)
+
+It's cleaned up to remove:
+* Mention of Arc90, various sponsors, etc
+* TypeKit (and Arc90's account)
+* php email feature
+
+Added:
+* zenburn theme
